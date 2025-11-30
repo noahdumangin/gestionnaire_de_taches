@@ -1,5 +1,5 @@
 {
-  "name": "gestion-des-taches",
+  "name": "gestion_des_taches",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {

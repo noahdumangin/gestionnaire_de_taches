@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Gestion-des-taches",
-    "slug": "Gestion-des-taches",
+    "name": "Gestion_des_taches",
+    "slug": "Gestion_des_taches",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

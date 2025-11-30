@@ -1,12 +1,7 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+const app = require("./src/app");
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+const PORT = 3000;
 
-mongoose.connect("mongodb://127.0.0.1:27017/gestionnaire_de_taches", {
-})
-.then(() => console.log("MongoDB connecté"))
-.catch(err => console.log("Erreur MongoDB :", err));
+app.listen(PORT, () => {
+  console.log("Serveur lancé sur http://localhost:"+ PORT);
+});
