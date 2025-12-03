@@ -10,7 +10,7 @@ export const getTask = async ({ after, signal } = {}) => {
 
     const res = await fetch(url, { signal });
     if (!res.ok) {
-      console.error("Erreur réseau, status:", res.status);
+      console.log("Erreur réseau, status:", res.status);
       return [];
     }
     const data = await res.json();
@@ -20,25 +20,25 @@ export const getTask = async ({ after, signal } = {}) => {
     if (err.name == 'AbortError') {
       return [];
     }
-    console.error("Erreur getTask:", err);
+    console.log("Erreur getTask:", err);
     return [];
   }
 };
 
   export async function simulateTasks() {
-    const url = "http://localhost:3000/task/simulate";
+    const url = `${BASE_URL}/simulate`;
     try {
       const res = await fetch(url, { method: 'POST' });
       return res.ok;
     } 
     catch (err) {
-      console.error('simulateTasks failed', err);
+      console.log('simulateTasks failed', err);
       return false;
     }
   }
 
   export async function createTask({ title, status }) {
-  const url = "http://localhost:3000/task";
+  const url = `${BASE_URL}`;
   try {
     const res = await fetch(url, {
       method: "POST",
@@ -53,7 +53,7 @@ export const getTask = async ({ after, signal } = {}) => {
     return await res.json(); 
   }
   catch (err) {
-    console.error("createTask failed", err);
+    console.log("createTask failed", err);
     return null;
   }
 }

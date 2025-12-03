@@ -1,83 +1,64 @@
-# gestionnaire_de_taches
-
-Voici le test en question : Test : Gestionnaire de tâches "collaboratif" simulé
+# Gestionnaire de tâches
 
 
-## Contexte :
+## Table des matières
 
-On te confie le développement d’un prototype mobile pour suivre les tâches d’un projet. Plusieurs personnes peuvent créer des tâches, et l’utilisateur mobile doit voir les mises à jour en quasi-temps réel de manière fluide.
+- [Description de l'application](#description-de-lapplication)
+- [Technologies utilisées](#technologies-utilisées)
+- [Installation et lancement](#installation-et-lancement)
+- [Images](#images)
 
- 
+## Description de l'application
 
-## Objectif :
+Application de gestion de tâches qui permet d'ajouter des tâches et qui affiche les 
+20 dernières créées. Possibilité de lancer une simulation de création de 10 tâches. 
 
-Créer une app mobile qui permet d’afficher une liste de tâches et de voir automatiquement les nouvelles tâches créées côté backend (simulateur multi-utilisateurs). 
+## Technologies utilisées
 
- 
+- **Langage** : Javascript / React
+- **IDE** : VSCode
+- **Base de données** : MongoDB
 
-## Partie Backend (Node.js + MongoDB) :
+## Installation et lancement
 
-À développer :
+**Prérequis**
+- Node.js installé
+- MongoDB installé et actif
+- Expo CLI installé (`npm install -g expo-cli`)
 
-- Modèle MongoDB Task :
-    - title (string)
-    - status ("todo", "in_progress", "done")
-    - createdAt (Date)
+<br>
 
-- Endpoints :
-    - ```GET /tasks?after=<date>``` – retourne les nouvelles tâches après une certaine date (max 20)
+- sous linux en mode web :
+    - verifiez que mongodb est bien actif : 
+    ```bash
+    sudo systemctl start mongod
+    ```
+    - lancez le serveur quand vous êtes dans le dossier BACKEND : 
+    ```bash
+    node server.js
+    ```
+    - lancez l'application : 
+    ```bash
+    npm start
+    ```
+- avec l'application Expo GO :
+    - Assurez-vous que votre téléphone est connecté au **même réseau Wi-Fi** que votre PC.
+    - Dans le fichier `taskApi.js`, remplacez `BASE_URL` par l’IP locale de votre PC :
+    ```js
+    const BASE_URL = "http://xx:3000"; // remplacez xx par votre IP
+    ```
+    - lancez le serveur quand vous êtes dans le dossier BACKEND : 
+    ```bash
+    node server.js
+    ```
+    - lancez l'application : 
+    ```bash
+    npm start
+    ```
+    - Scannez le QR code avec l’application **Expo Go** sur votre téléphone.
 
-- Simulateur :
-    - Endpoint POST /simulate qui crée automatiquement 10 tâches espacées de 5s(simulant des utilisateurs)
 
- 
+## Images
 
-## Partie Frontend (React Native) :
-
-Écran à développer :
-
-- Liste des tâches :
-    - Affichage dynamique avec FlatList
-    - Bouton pour "simuler des ajouts"
-    - Mise à jour automatique toutes les 5 secondes des nouvelles tâches
-
-
-## Points attendus :
-
-- Les tâches s’ajoutent sans recharger toute la liste
-
-- Bon usage de l’asynchrone, useEffect, useCallback, etc.
-
-- Pas de fetch redondant si pas de nouvelle tâche
-
-- Bonne architecture des composants et services API
-
- 
-
-## Bonus possible : (facultatif)
-
-- Coloration visuelle selon le statut (todo = gris, in_progress = bleu, done = vert)
-
-- Animation à l’arrivée d’une tâche
-
-- Tri côté client ou backend
-
- 
-
-## Contraintes :
-
-- Front : structure de composants claire, appels API bien séparés
-
-- Back : code clair et réutilisable, Mongo bien utilisé (index sur createdAt)
-
-- Pas de lib externe obligatoire pour le cache ou la synchro
-
- 
-
-## Livrables :
-
-- Dépôt GitHub avec code front + back
-
-- README rapide (installation + logique)
-
-- (optionnel) mini-note de conception
+ ![liste_taches](Images/liste_taches.png)
+ ![creation_taches](Images/creation_taches.png)
