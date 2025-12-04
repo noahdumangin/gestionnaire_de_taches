@@ -60,5 +60,5 @@ Application de gestion de tâches qui permet d'ajouter des tâches et qui affich
 
 ## Images
 
- ![liste_taches](Images/liste_taches.png)
- ![creation_taches](Images/creation_taches.png)
+ ![liste_taches](Images/liste_tache.png)
+ ![creation_taches](Images/creation_tache.png)
