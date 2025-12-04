@@ -1,6 +1,4 @@
 # Gestionnaire de tâches
-
-
 ## Table des matières
 
 - [Description de l'application](#description-de-lapplication)
