@@ -12,7 +12,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/gestionnaire_de_taches")
   .then(() => console.log("connecté à la bdd"))
   .catch(err => console.error(err));
 
-// Charger les routes
+//charger les routes
 const taskRoutes = require("../routes/task_route");
 app.use("/task", taskRoutes);
 

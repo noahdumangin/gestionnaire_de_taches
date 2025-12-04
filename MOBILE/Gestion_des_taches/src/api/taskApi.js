@@ -58,4 +58,16 @@ export const getTask = async ({ after, signal } = {}) => {
   }
 }
 
+export async function deleteTask(id) {
+  const url = `${BASE_URL}/delete/${id}`;
+  try {
+    const res = await fetch(url, { method: 'POST' });
+      return res.ok;
+  }
+  catch (err) {
+    console.log("deleteTask failed", err);
+    return false;
+  }
+}
+
 

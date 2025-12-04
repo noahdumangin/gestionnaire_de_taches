@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Animated } from "react-native";
+import { deleteTask } from "../api/taskApi";
 
 function statusColor(status) {
   switch (status) {
@@ -30,7 +31,6 @@ function timeAgo(isoDate) {
 export default function TaskItem({ task, onPress }) {
   const bg = statusColor(task.status);
 
-  // fade-in animation on mount
   const opacity = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.timing(opacity, { toValue: 1, duration: 300, useNativeDriver: true }).start();
@@ -39,7 +39,6 @@ export default function TaskItem({ task, onPress }) {
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={() => onPress && onPress(task)}>
       <Animated.View style={[styles.container, { backgroundColor: bg, opacity }]}> 
-
         <View style={styles.content}>
           <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>
             {task.title}
@@ -50,6 +49,16 @@ export default function TaskItem({ task, onPress }) {
             <Text style={styles.time}>{timeAgo(task.createdAt)}</Text>
           </View>
         </View>
+        <TouchableOpacity style={styles.headerAddButton} onPress={async () => {
+          const ok = await deleteTask(task._id);
+          if (ok) {
+            await fetchTask();
+          } else {
+            console.warn('the task was not successfully deleted');
+          }
+        }}>
+          <Text style={styles.headerAddText}>Supprimer</Text>
+        </TouchableOpacity>
       </Animated.View>
     </TouchableOpacity>
   );
@@ -92,5 +101,7 @@ const styles = StyleSheet.create({
   },
   time: { 
     fontSize: 14, color: "#000000ff" 
-  }
+  },
+  headerAddButton: { marginTop: 8, backgroundColor: '#ff0000ff', paddingVertical: 8, paddingHorizontal: 12, borderRadius: 8 },
+  headerAddText: { color: '#fff', fontWeight: '600' }
 });

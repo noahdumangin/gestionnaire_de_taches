@@ -3,12 +3,11 @@ const Task = require("../models/task");
 
 const router = express.Router();
 
-// GET /tasks
 router.get("/", async (req, res) => {
   try {
     const tasks = await Task.find({})
-      .sort({ createdAt: -1 }) // tri décroissant (les plus récentes d'abord)
-      .limit(20);              // max 20 tâches
+      .sort({ createdAt: -1 }) 
+      .limit(20);              
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ error: "Erreur serveur" });
@@ -29,7 +28,7 @@ router.post("/simulate", async (req, res) => {
         console.log("Tâche simulée " + i + " créée");
       } 
       catch (err) {
-        console.error("Erreur création tâche simulée :", err);
+        console.log("Erreur création tâche simulée :", err);
       }
     }, i * 5000);
   }
@@ -45,7 +44,24 @@ router.post("/", async (req, res) => {
     console.log("Tâche créée :");
   } 
   catch (err) {
-    console.error(err);
+    console.log(err);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+router.post("/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const taskDelete = await Task.findByIdAndDelete(id);
+    console.log("Tâche supprimée :", id);
+
+    if (!taskDelete){
+      return res.status(404).json({ error: "Tâche non trouvée" });
+    }
+
+  }
+  catch(err) {
+    console.log(err);
     res.status(500).json({ error: "Erreur serveur" });
   }
 });
